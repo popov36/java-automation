@@ -8,3 +8,4 @@ public class TestClass {
     System.out.println(Faker.instance().backToTheFuture().quote());
     }
 }
+
