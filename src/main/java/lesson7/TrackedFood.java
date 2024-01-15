@@ -21,13 +21,27 @@ public class TrackedFood implements Comparable<TrackedFood> {
 
 
     public String getName() {
+
         return name;
+    }
+
+    public String getFoodId() {
+        return foodId;
     }
 
 
     @Override
     public int compareTo(TrackedFood o) {
         return this.name.compareTo(o.name);
+    }
+    @Override
+    public String toString() {
+        return "TrackedFood{" +
+                "foodId='" + foodId + '\'' +
+                ", servingId='" + servingId + '\'' +
+                ", name='" + name + '\'' +
+                ", trackedId=" + trackedId +
+                '}';
     }
 };
 
