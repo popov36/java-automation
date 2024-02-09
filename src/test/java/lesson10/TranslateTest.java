@@ -2,6 +2,7 @@ package lesson10;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,11 +15,16 @@ public class TranslateTest {
     public void setUp() {
 
         Configuration.timeout = 5000;
-
         open("https://translate.google.com/?sl=uk&tl=en&op=translate");
+
     }
 
     @Test(dataProvider = "languages")
+    @Feature("Translations")
+    @Description("Google Translation Test")
+    @Owner("Denis Popov")
+    @Link(name = "Google Translate", url = "https://translate.google.com/")
+    @Severity(SeverityLevel.NORMAL)
     public void testGoogleTranslate(String language, String translation) {
 
 
@@ -40,13 +46,13 @@ public class TranslateTest {
     public Object[][] languages() {
         return new Object[][]{
                 {"English", "I will learn TestNG cool"},
-                {"Bulgarian", "Ще науча TestNG яко"},
+                {"Bulgarian", "Ще проуча тестването"},
                 {"Chinese (Traditional)", "我將研究測試"},
                 {"Czech", "Naučím se TestNG v pohodě"},
-                {"Danish", "Jeg vil lære TestNG cool"},
+                {"Danish", "Jeg vil studere testen"},
                 {"Dutch", "Ik zal TestNG cool leren"},
                 {"French", "J'apprendrai TestNG cool"},
-                {"Georgian", "მაგრად ვისწავლი TestNG"},
+                {"Georgian", "ტესტირებას შევისწავლები "},
                 {"German", "Ich werde TestNG cool lernen"},
                 {"Irish", "Foghlaimeoidh mé TestNG fionnuar"},
                 {"Italian", "Imparerò il TestNG alla grande"},

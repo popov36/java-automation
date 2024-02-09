@@ -2,6 +2,8 @@ package lesson13;
 
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
+
+import io.qameta.allure.Step;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -23,19 +25,19 @@ public class ProductPage {
 //        productList.shouldHave(CollectionCondition.size(6));
 //
 //    }
-
+    @Step("Add to cart $7.99 product")
     public void addToCartProduct2() {
 
         addProduct2ToCart.click();
 
     }
-
+    @Step("Add to cart $9.99 product")
     public void addToCartProduct5() {
 
         addProduct5ToCart.click();
 
     }
-
+    @Step("Click on cart")
     public void clickCartButton() {
 
         shoppingCart.click();

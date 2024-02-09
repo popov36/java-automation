@@ -2,6 +2,8 @@ package lesson13;
 
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
+
+import io.qameta.allure.Step;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -21,13 +23,13 @@ public class CheckoutOverviewPage {
         return itemsPrice.getText();
 
     }
-
+    @Step ("Get tax")
     public String getTax() {
 
         return tax.getText();
 
     }
-
+    @Step("Finish button click")
     public void finishButtonClick() {
 
         finishButton.click();

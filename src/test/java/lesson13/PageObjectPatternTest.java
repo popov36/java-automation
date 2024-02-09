@@ -3,10 +3,13 @@ package lesson13;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.*;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 
 import static com.codeborne.selenide.Selenide.open;
+
 
 public class PageObjectPatternTest {
 
@@ -18,7 +21,7 @@ public class PageObjectPatternTest {
     private final CheckoutOverviewPage checkoutOverviewPage = new CheckoutOverviewPage();
     private final CompletePage completePage = new CompletePage();
 
-    @BeforeClass
+    @BeforeTest
     public void setUp() {
 
         Configuration.timeout = 10000;
@@ -28,6 +31,7 @@ public class PageObjectPatternTest {
 
 
     @Test(enabled = false)
+    @Owner("Denis Popov")
     public void invalidLogin() {
 
         loginPage.setLogin("standard_user");
@@ -38,6 +42,10 @@ public class PageObjectPatternTest {
     }
 
     @Test
+    @Feature("PageObjectPatternTest")
+    @Owner("Denis Popov")
+    @Description("Check Success Purchase")
+    @Severity(SeverityLevel.CRITICAL)
     public void SuccessPurchase() {
 
         loginPage.setLogin("standard_user");
@@ -58,7 +66,7 @@ public class PageObjectPatternTest {
         checkoutOverviewPage.finishButtonClick();
         completePage.checkThankYouTitle();
 
-        Selenide.sleep(5000);
+//        Selenide.sleep(5000);
 
 
     }
