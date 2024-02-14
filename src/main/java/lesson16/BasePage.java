@@ -9,8 +9,8 @@ public class BasePage {
 
     public WebDriver driver;
 
-    public BasePage() throws MalformedURLException {
-        driver = DriverManager.createDriver();
+    public BasePage() {
+        driver = DriverManager.getDriver();
         PageFactory.initElements(driver, this);
     }
 

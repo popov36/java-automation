@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.net.MalformedURLException;
 
-public class GmailPage {
+public class GmailPage extends BasePage {
 
     @FindBy(id="com.google.android.gm:id/action_done")
     private WebElement goToGmailButton;

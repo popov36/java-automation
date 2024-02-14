@@ -14,82 +14,43 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
 
-//    private static Logger LOG = Logger.getLogger(DriverManager.class.getName());
-    private static DesiredCapabilities capabilities = new DesiredCapabilities();
+    private static AndroidDriver driver;
     private static URL url;
-    static AndroidDriver driver;
-
-    static {
-        try {
-            url = new URL("http://127.0.0.1:4723/wd/hub");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private DriverManager() {
     }
 
-    public static AndroidDriver createDriver() {
+    public static AndroidDriver getDriver() {
+        if (driver == null) {
+            try {
+                url = new URL("http://127.0.0.1:4723/wd/hub");
+
+                DesiredCapabilities capabilities = getDesiredCapabilities();
+
+                driver = new AndroidDriver(url, capabilities);
+                driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("Failed to create AndroidDriver. Reason: " + e.getMessage(), e);
+            }
+        }
+        return driver;
+    }
+
+    private static DesiredCapabilities getDesiredCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-//        LOG.info("Create new driver");
-        capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "27e2c8e4f61c7ece");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.google.android.gm");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.google.android.gm.ConversationListActivityGmail");
+        return capabilities;
+    }
 
-
-        try {
-            return new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+    public static void closeDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
         }
     }
-//    private static DesiredCapabilities getCapabilities() {
-//
-//        capabilities = new DesiredCapabilities();
-//        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-//        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "27e2c8e4f61c7ece");
-//        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.google.android.gm");
-//        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.google.android.gm.ConversationListActivityGmail");
-//        return capabilities;
-//
-//
-//    }
-
-
-
-
-//    public static AndroidDriver getDriver() throws MalformedURLException {
-//
-//        public WebDriver createDriver() {
-//            DesiredCapabilities capabilities = new DesiredCapabilities();
-//            LOG.info("Create new driver");
-//            capabilities = new DesiredCapabilities();
-//            capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-//            capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
-//            capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.google.android.gm");
-//            capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.google.android.gm.ConversationListActivityGmail");
-//
-//
-//            try {
-//                return new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-//            } catch (MalformedURLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//    }
-
-
-//    public static void setCapabilities() throws MalformedURLException {
-//        driver = new AndroidDriver(url, getCapabilities());
-//
-//        driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-//    }
-
-    public static void closeDriver() throws MalformedURLException {
-        createDriver().quit();
-    }
-
 }
+
+

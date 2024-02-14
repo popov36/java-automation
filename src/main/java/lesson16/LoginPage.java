@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
-public class LoginPage {
+public class LoginPage extends BasePage{
 
     @FindBy(id = "com.google.android.gm:id/welcome_tour_got_it")
     private WebElement understandButton;
@@ -40,14 +40,17 @@ public class LoginPage {
     @FindBy(id = "signinconsentNext")
     private WebElement acceptButton;
 
+    @FindBy(id = "com.google.android.gm:id/action_done")
+    private WebElement takeMeToGmailButton;
+
 
     public void goToGmailAccount() {
         understandButton.click();
-        addAccountButton.click();
-        gmailAccountButton.click();
+//        addAccountButton.click();
+//        gmailAccountButton.click();
     }
 
-    public void addNewGmailAccount(String email, String password) throws MalformedURLException {
+    public void addNewGmailAccount(String email, String password) {
         emailInput.sendKeys(email);
         window.click();
         nextButton.click();
@@ -66,6 +69,11 @@ public class LoginPage {
 
     public void clickForgotEmailButton() {
         forgotEmailButton.click();
+    }
+
+    public void clickTakeMeToGmailButton(){
+
+        takeMeToGmailButton.click();
     }
 
     public LoginPage() throws MalformedURLException {
